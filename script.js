@@ -51,6 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Bilingual Dictionary & Engine
   initLanguageEngine();
+
+  // Portfolio Gallery Filter & Lightbox
+  initGalleryAndLightbox();
 });
 
 // Bilingual Translations Dictionary
@@ -64,6 +67,7 @@ const translations = {
     navServices: "خدماتنا",
     navWhyUs: "لماذا نحن",
     navProjects: "مشاريعنا",
+    navGallery: "معرض الصور",
     navContact: "تواصل معنا",
     getQuote: "طلب عرض سعر",
     heroBadge: "شريككم المعتمد لحلول المعارض والتجهيزات",
@@ -159,7 +163,47 @@ const translations = {
     lblEmail: "إيميل:",
     lblLoc: "الموقع:",
     rights: "جميع الحقوق محفوظة لمؤسسة هندام سبيس (Hindam Space)",
-    floatWaText: "محادثة واتساب"
+    floatWaText: "محادثة واتساب",
+    galleryTag: "معرض الصور | Gallery",
+    galleryTitle: "لقطات حية من مشاريعنا المنفذة",
+    gallerySub: "تصفح أحدث أعمالنا في المعارض، تفعيلات المولات، اللوحات الإعلانية، والتجهيزات الداخلية في مختلف مدن المملكة",
+    filterAll: "الكل",
+    filterBooths: "أجنحة المعارض",
+    filterActivations: "تفعيلات المولات والمجسمات",
+    filterSignage: "اللوحات والبوابات",
+    filterInteriors: "التصميم الداخلي والمتاجر",
+    catBooths: "أجنحة المعارض",
+    catActivations: "تفعيلات المولات والمجسمات",
+    catSignage: "اللوحات والبوابات",
+    catInteriors: "التصميم الداخلي والمتاجر",
+    galMobil1: "جناح موبيل (Mobil / APSCO)",
+    galMobil2: "منصة موبيل - المعرض الصناعي",
+    galPetromin: "جناح بترومين (Petromin / Petro Lube)",
+    galHabib: "جناح د. سليمان الحبيب الطبي",
+    galDerma1: "جناح ديرما بيلا (Derma Pella)",
+    galDerma2: "مجسم ومنصة Mostal Foam",
+    galSalama: "جناح سلامة للتأمين",
+    galColgate1: "منصة كولجيت التفاعلية (Colgate Total)",
+    galColgate2: "مجسمات كولجيت ثلاثية الأبعاد",
+    galLavanda: "تفعيل لافاندا بارك (Lavanda Park)",
+    galCraft: "ركن التصوير التفاعلي - سوق الحرف",
+    galManar: "فعالية العودة للمدارس - المنار مول",
+    galGradCap: "مجسم قبعة التخرج الضخم (جيل قائد)",
+    galGradStage: "مسرح وشاشة حفل التخرج 2026",
+    galRoshn: "مجسمات وستاندات فعاليات روشن",
+    galAbco: "مجسم شعار ABCO المضيء",
+    galZaiian: "لوحة Zaiian Space بإضاءة خلفية",
+    galHaramain1: "بوابة قطار الحرمين السريع - رمضان",
+    galHaramain2: "قوس صالة المغادرة - قطار الحرمين",
+    galAwareness: "بوابة حملة التوعية بسرطان الثدي",
+    galTotems: "أبراج ترحيبية مضيئة - الهيئة السعودية للمياه",
+    galTazajWin: "تغليف واجهات زجاجية (مطاعم الطازج)",
+    galTazajIn: "حروف بارزة وستاند ترويجي (الطازج)",
+    galSchaefer: "تشطيب مقر SSI SCHÄFER",
+    galElla: "ستاند عرض منتجات ELLA المضيء",
+    galValet: "منصة خدمة صف السيارات - جدة سكوير",
+    galSirc: "تجهيز وتغليف جهاز إعادة التدوير (سرك / سدكو)",
+    galPottery: "جدارية عرض تراثية للفخار"
   },
   en: {
     pageTitle: "Hindam Space | Excellence in Event & Retail Production - Turnkey Fit-Outs KSA",
@@ -170,6 +214,7 @@ const translations = {
     navServices: "Services",
     navWhyUs: "Why Us",
     navProjects: "Projects",
+    navGallery: "Gallery",
     navContact: "Contact Us",
     getQuote: "Request a Quote",
     heroBadge: "Your Trusted Partner for Turnkey Exhibitions & Fit-Outs",
@@ -265,7 +310,47 @@ const translations = {
     lblEmail: "Email:",
     lblLoc: "Location:",
     rights: "All rights reserved to Hindam Space Establishment.",
-    floatWaText: "Chat on WhatsApp"
+    floatWaText: "Chat on WhatsApp",
+    galleryTag: "Project Gallery",
+    galleryTitle: "Live Captures From Our Completed Works",
+    gallerySub: "Browse our latest executions across exhibition booths, mall activations, 3D signage, and interior fit-outs across KSA",
+    filterAll: "All",
+    filterBooths: "Exhibition Booths",
+    filterActivations: "Mall Activations & 3D",
+    filterSignage: "Signage & Arches",
+    filterInteriors: "Interiors & Retail",
+    catBooths: "Exhibition Booths",
+    catActivations: "Mall Activations & 3D",
+    catSignage: "Signage & Arches",
+    catInteriors: "Interiors & Retail",
+    galMobil1: "Mobil / APSCO Industrial Pavilion",
+    galMobil2: "Mobil Exhibition Booth",
+    galPetromin: "Petromin / Petro Lube Custom Booth",
+    galHabib: "Dr. Sulaiman Al Habib Outdoor Pavilion",
+    galDerma1: "Derma Pella Exhibition Booth",
+    galDerma2: "Mostal Foam 3D Prop & Stand",
+    galSalama: "Salama Insurance Pavilion",
+    galColgate1: "Colgate Total Interactive Mall Booth",
+    galColgate2: "Colgate 3D Giant Product Props",
+    galLavanda: "Lavanda Park Mall Activation",
+    galCraft: "Craft Market Interactive Photo Booth",
+    galManar: "Al Manar Mall Back to School Zone",
+    galGradCap: "Giant Graduation Cap 3D Installation",
+    galGradStage: "Graduation Ceremony 2026 Stage & LED",
+    galRoshn: "Roshn / KAFD Event Standees",
+    galAbco: "ABCO 3D Illuminated Logo Structure",
+    galZaiian: "Zaiian Space Backlit Wall Signage",
+    galHaramain1: "Haramain High Speed Railway Ramadan Arch",
+    galHaramain2: "Haramain Departures Ramadan Gate",
+    galAwareness: "Breast Cancer Awareness Mall Arch",
+    galTotems: "Saudi Water Authority Illuminated Totems",
+    galTazajWin: "Al Tazaj Window Vinyl Graphics",
+    galTazajIn: "Al Tazaj 3D Signage & Die-Cut Standee",
+    galSchaefer: "SSI SCHÄFER Office Interior Fit-Out",
+    galElla: "ELLA Illuminated Retail Display Stand",
+    galValet: "Jeddah Square Valet Parking Podium",
+    galSirc: "SIRC / SEDCO Smart Recycling Kiosk",
+    galPottery: "Heritage Clay Pottery Display Wall"
   }
 };
 
@@ -356,4 +441,106 @@ function handleFormSubmit(event) {
     // Reset Form fields
     document.getElementById('quoteForm').reset();
   }, 600);
+}
+
+// Gallery Filter & Lightbox Engine
+function initGalleryAndLightbox() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+  const lightboxModal = document.getElementById('lightboxModal');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCat = document.getElementById('lightboxCat');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+
+  let currentVisibleItems = [...galleryItems];
+  let currentIndex = 0;
+
+  // Category Filtering
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+      currentVisibleItems = [];
+
+      galleryItems.forEach(item => {
+        const cat = item.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          item.classList.remove('hidden');
+          currentVisibleItems.push(item);
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  function openLightbox(index) {
+    if (!lightboxModal || currentVisibleItems.length === 0) return;
+    currentIndex = (index + currentVisibleItems.length) % currentVisibleItems.length;
+    const item = currentVisibleItems[currentIndex];
+    const img = item.querySelector('img');
+    const cat = item.querySelector('.gallery-cat-badge');
+    const title = item.querySelector('h4');
+
+    lightboxImg.src = img ? img.src : '';
+    lightboxImg.alt = img ? img.alt : '';
+    lightboxCat.textContent = cat ? cat.textContent : '';
+    lightboxTitle.textContent = title ? title.textContent : '';
+
+    lightboxModal.classList.add('active');
+    lightboxModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lightboxModal) return;
+    lightboxModal.classList.remove('active');
+    lightboxModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const idx = currentVisibleItems.indexOf(item);
+      if (idx !== -1) openLightbox(idx);
+    });
+  });
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', closeLightbox);
+  }
+
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openLightbox(currentIndex - 1);
+    });
+  }
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openLightbox(currentIndex + 1);
+    });
+  }
+
+  if (lightboxModal) {
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) {
+        closeLightbox();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') openLightbox(currentIndex - 1);
+    if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
+  });
 }
