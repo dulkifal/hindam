@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# OpenAI / ChatGPT Search & Crawlers
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity, Anthropic, and Google AI
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.hindam-adv.com/sitemap.xml

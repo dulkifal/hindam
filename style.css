@@ -1429,6 +1429,72 @@ html[lang="en"] .project-overlay {
 }
 
 /* ==========================================================================
+   FAQ Section
+   ========================================================================== */
+.faq-section {
+  background-color: var(--bg-white);
+}
+
+.faq-list {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-item {
+  background: var(--bg-page);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  transition: var(--transition);
+}
+
+.faq-item[open] {
+  background: var(--bg-white);
+  border-color: var(--gold-400);
+  box-shadow: var(--shadow-md);
+}
+
+.faq-question {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--navy-900);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: '+';
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--gold-600);
+  flex-shrink: 0;
+}
+
+.faq-item[open] .faq-question::after {
+  content: '−';
+}
+
+.faq-answer {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border-light);
+  color: var(--text-muted);
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+/* ==========================================================================
    Contact Section
    ========================================================================== */
 .contact-section {

@@ -203,7 +203,18 @@ const translations = {
     galElla: "ستاند عرض منتجات ELLA المضيء",
     galValet: "منصة خدمة صف السيارات - جدة سكوير",
     galSirc: "تجهيز وتغليف جهاز إعادة التدوير (سرك / سدكو)",
-    galPottery: "جدارية عرض تراثية للفخار"
+    galPottery: "جدارية عرض تراثية للفخار",
+    metaDescription: "مؤسسة هندام سبيس (Hindam Space) شركة سعودية رائدة في تصميم وتصنيع أجنحة المعارض، التصميم الداخلي، تجهيز المحلات، اللوحات الإعلانية، وتجليد الأساطيل في جدة والرياض وكافة أنحاء المملكة.",
+    faqTag: "الأسئلة الشائعة | FAQ",
+    faqTitle: "إجابات سريعة حول خدماتنا ومعايير التنفيذ",
+    faqQ1: "ما هي الخدمات الرئيسية التي تقدمها مؤسسة هندام سبيس في السعودية؟",
+    faqA1: "تقدم مؤسسة هندام سبيس خمس خدمات متكاملة من الفكرة حتى التسليم في جميع أنحاء المملكة: تصميم وتصنيع أجنحة المعارض، التصميم الداخلي والتشطيبات، تجهيز المحلات والمتاجر، حلول اللوحات الإعلانية والشاشات (الداخلية والخارجية)، وتجليد وتجهيز أساطيل المركبات.",
+    faqQ2: "هل تلتزم هندام سبيس باشتراطات مراكز المعارض مثل واجهة الرياض وجدة سوبر دوم؟",
+    faqA2: "نعم، نلتزم امتثالاً تاماً بمتطلبات السلامة والكهرباء والإنشاءات المعتمدة لدى كبرى مراكز المعارض في المملكة، بما في ذلك واجهة الرياض (Riyadh Front) وجدة سوبر دوم (Jeddah Superdome)، لضمان سرعة الاعتماد والتركيب في الموقع.",
+    faqQ3: "هل يتم التصنيع داخل ورش ومصانع المؤسسة؟",
+    faqA3: "نعم، تمتلك مؤسسة هندام سبيس قدرات تصنيع داخلي متكامل تشمل النجارة والحدادة والأكريليك والطباعة والتشطيبات باستخدام مواد عالية الجودة، مما يتيح ضبط الجودة والالتزام بمواعيد التسليم القياسية.",
+    faqQ4: "أين يقع المقر الرئيسي وكيف يمكننا طلب عرض سعر؟",
+    faqA4: "يقع مقرنا الرئيسي في المملكة العربية السعودية (حي الحمدانية) ونغطي جميع مناطق المملكة. يمكنكم طلب عرض سعر عبر نموذج التواصل أدناه أو البريد الإلكتروني info@hindam-adv.com أو الاتصال على +966 56 761 5878 / +966 53 401 8003."
   },
   en: {
     pageTitle: "Hindam Space | Excellence in Event & Retail Production - Turnkey Fit-Outs KSA",
@@ -350,7 +361,18 @@ const translations = {
     galElla: "ELLA Illuminated Retail Display Stand",
     galValet: "Jeddah Square Valet Parking Podium",
     galSirc: "SIRC / SEDCO Smart Recycling Kiosk",
-    galPottery: "Heritage Clay Pottery Display Wall"
+    galPottery: "Heritage Clay Pottery Display Wall",
+    metaDescription: "Hindam Space is a premier Saudi production and fit-out company delivering turnkey exhibition booths, interior fit-outs, retail shop fitting, 3D signage, and commercial fleet graphics across Saudi Arabia.",
+    faqTag: "Frequently Asked Questions",
+    faqTitle: "Quick Answers About Our Services & Standards",
+    faqQ1: "What services does Hindam Space provide in Saudi Arabia?",
+    faqA1: "Hindam Space provides five core turnkey services across Saudi Arabia: (1) Exhibition Booths & Pavilions, (2) Interior Design & Turnkey Fit-Outs, (3) Retail & Shop Fitting, (4) Indoor & Outdoor Signage Solutions and LED displays, and (5) Commercial Vehicle Branding & Fleet Graphics.",
+    faqQ2: "Does Hindam Space comply with Riyadh Front and Jeddah Superdome exhibition requirements?",
+    faqA2: "Yes. Hindam Space maintains full structural, electrical, and safety compliance with major Saudi exhibition centers including Riyadh Front and Jeddah Superdome, ensuring smooth approvals and rapid on-site installation.",
+    faqQ3: "Does Hindam Space handle manufacturing in-house?",
+    faqA3: "Yes. Hindam Space operates in-house manufacturing facilities covering carpentry, metalwork, acrylic fabrication, printing, and finishing, providing turnkey delivery from concept to handover.",
+    faqQ4: "Where is Hindam Space headquartered and how can we request a quote?",
+    faqA4: "Hindam Space is headquartered in Al Hamdaniyah District, Saudi Arabia, serving clients nationwide. You can request a quote via info@hindam-adv.com or by calling +966 56 761 5878 or +966 53 401 8003."
   }
 };
 
@@ -379,9 +401,13 @@ function applyLanguage(lang) {
   const dict = translations[lang];
   if (!dict) return;
 
-  // Update Page Title
+  // Update Page Title & Meta Description
   if (dict.pageTitle) {
     document.title = dict.pageTitle;
+  }
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && dict.metaDescription) {
+    metaDesc.setAttribute('content', dict.metaDescription);
   }
 
   // Update elements with data-i18n attribute
