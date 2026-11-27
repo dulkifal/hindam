@@ -1007,28 +1007,28 @@
               <div class="form-row">
                 <div class="form-group">
                   <label for="name" data-i18n="formName">الاسم الكامل *</label>
-                  <input type="text" id="name" required placeholder="مثال: محمد السعيد">
+                  <input type="text" id="name" name="name" required placeholder="مثال: محمد السعيد" data-i18n-placeholder="phName">
                 </div>
                 <div class="form-group">
                   <label for="company" data-i18n="formCompany">اسم الشركة أو المؤسسة</label>
-                  <input type="text" id="company" placeholder="مثال: شركة الأعمال المتقدمة">
+                  <input type="text" id="company" name="company" placeholder="مثال: شركة الأعمال المتقدمة" data-i18n-placeholder="phCompany">
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label for="phone" data-i18n="formPhone">رقم الجوال *</label>
-                  <input type="tel" id="phone" required placeholder="05XXXXXXXX" dir="ltr">
+                  <input type="tel" id="phone" name="phone" required placeholder="05XXXXXXXX" data-i18n-placeholder="phPhone" dir="ltr">
                 </div>
                 <div class="form-group">
                   <label for="email" data-i18n="formEmail">البريد الإلكتروني *</label>
-                  <input type="email" id="email" required placeholder="name@company.com" dir="ltr">
+                  <input type="email" id="email" name="email" required placeholder="name@company.com" data-i18n-placeholder="phEmail" dir="ltr">
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="serviceType" data-i18n="formService">الخدمة المطلوبة *</label>
-                <select id="serviceType" required>
+                <select id="serviceType" name="service" required>
                   <option value="" disabled selected data-i18n="formSelectPrompt">اختر الخدمة...</option>
                   <option value="booths" data-i18n="opt1">تصميم وتصنيع أجنحة المعارض (Exhibition Booths)</option>
                   <option value="fitouts" data-i18n="opt2">التصميم الداخلي والتشطيبات (Turnkey Fit-Outs)</option>
@@ -1040,7 +1040,7 @@
 
               <div class="form-group">
                 <label for="message" data-i18n="formMsg">تفاصيل المشروع / ملاحظات</label>
-                <textarea id="message" rows="4" placeholder="المساحة، موقع المعرض، التاريخ المتوقع للتسليم..."></textarea>
+                <textarea id="message" name="message" rows="4" placeholder="المساحة، موقع المعرض، التاريخ المتوقع للتسليم..." data-i18n-placeholder="phMsg"></textarea>
               </div>
 
               <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
@@ -1050,6 +1050,10 @@
               <div id="formSuccessMessage" class="form-success-box" style="display: none;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="success-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 <span data-i18n="formSuccessMsg">شكراً لتواصلكم! تم استلام طلبكم بنجاح وسيتصل بكم فريقنا قريباً.</span>
+              </div>
+
+              <div id="formErrorMessage" class="form-error-box" style="display: none;">
+                <span data-i18n="formErrorMsg">تعذر الإرسال التلقائي حالياً. يرجى مراسلتنا مباشرة عبر info@hindam-adv.com أو واتساب.</span>
               </div>
             </form>
           </div>

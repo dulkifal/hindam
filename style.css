@@ -1666,6 +1666,19 @@ html[lang="en"] .project-overlay {
   gap: 0.75rem;
 }
 
+.form-error-box {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md);
+  color: #991b1b;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .success-icon {
   width: 24px;
   height: 24px;

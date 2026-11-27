@@ -214,7 +214,14 @@ const translations = {
     faqQ3: "هل يتم التصنيع داخل ورش ومصانع المؤسسة؟",
     faqA3: "نعم، تمتلك مؤسسة هندام سبيس قدرات تصنيع داخلي متكامل تشمل النجارة والحدادة والأكريليك والطباعة والتشطيبات باستخدام مواد عالية الجودة، مما يتيح ضبط الجودة والالتزام بمواعيد التسليم القياسية.",
     faqQ4: "أين يقع المقر الرئيسي وكيف يمكننا طلب عرض سعر؟",
-    faqA4: "يقع مقرنا الرئيسي في المملكة العربية السعودية (حي الحمدانية) ونغطي جميع مناطق المملكة. يمكنكم طلب عرض سعر عبر نموذج التواصل أدناه أو البريد الإلكتروني info@hindam-adv.com أو الاتصال على +966 56 761 5878 / +966 53 401 8003."
+    faqA4: "يقع مقرنا الرئيسي في المملكة العربية السعودية (حي الحمدانية) ونغطي جميع مناطق المملكة. يمكنكم طلب عرض سعر عبر نموذج التواصل أدناه أو البريد الإلكتروني info@hindam-adv.com أو الاتصال على +966 56 761 5878 / +966 53 401 8003.",
+    waWelcomeMsg: "مرحباً، أود الاستفسار عن خدمات هندام سبيس",
+    phName: "مثال: محمد السعيد",
+    phCompany: "مثال: شركة الأعمال المتقدمة",
+    phPhone: "05XXXXXXXX",
+    phEmail: "name@company.com",
+    phMsg: "المساحة، موقع المعرض، التاريخ المتوقع للتسليم...",
+    formErrorMsg: "تعذر الإرسال التلقائي حالياً. يرجى مراسلتنا مباشرة عبر info@hindam-adv.com أو واتساب."
   },
   en: {
     pageTitle: "Hindam Space | Excellence in Event & Retail Production - Turnkey Fit-Outs KSA",
@@ -372,7 +379,14 @@ const translations = {
     faqQ3: "Does Hindam Space handle manufacturing in-house?",
     faqA3: "Yes. Hindam Space operates in-house manufacturing facilities covering carpentry, metalwork, acrylic fabrication, printing, and finishing, providing turnkey delivery from concept to handover.",
     faqQ4: "Where is Hindam Space headquartered and how can we request a quote?",
-    faqA4: "Hindam Space is headquartered in Al Hamdaniyah District, Saudi Arabia, serving clients nationwide. You can request a quote via info@hindam-adv.com or by calling +966 56 761 5878 or +966 53 401 8003."
+    faqA4: "Hindam Space is headquartered in Al Hamdaniyah District, Saudi Arabia, serving clients nationwide. You can request a quote via info@hindam-adv.com or by calling +966 56 761 5878 or +966 53 401 8003.",
+    waWelcomeMsg: "Hello, I would like to inquire about Hindam Space services.",
+    phName: "e.g. Mohammed Al-Saeed",
+    phCompany: "e.g. Advanced Business Co.",
+    phPhone: "+966 5X XXX XXXX",
+    phEmail: "name@company.com",
+    phMsg: "Dimensions, exhibition venue, expected delivery date...",
+    formErrorMsg: "Automatic sending failed. Please email us directly at info@hindam-adv.com or message us on WhatsApp."
   }
 };
 
@@ -419,6 +433,15 @@ function applyLanguage(lang) {
     }
   });
 
+  // Update input/textarea placeholders with data-i18n-placeholder attribute
+  const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+  placeholderElements.forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (dict[key]) {
+      el.setAttribute('placeholder', dict[key]);
+    }
+  });
+
   // Update Language switch button label
   const langBtnText = document.querySelector('.lang-switch-btn .lang-text');
   const langBtnBadge = document.querySelector('.lang-switch-btn .lang-badge');
@@ -428,45 +451,95 @@ function applyLanguage(lang) {
   if (langBtnBadge && dict.langBadge) {
     langBtnBadge.textContent = dict.langBadge;
   }
+
+  // Update WhatsApp welcome message according to active language
+  if (dict.waWelcomeMsg) {
+    const waLinks = document.querySelectorAll('a[href^="https://wa.me/"]');
+    const encodedMsg = encodeURIComponent(dict.waWelcomeMsg);
+    waLinks.forEach(link => {
+      link.href = `https://wa.me/966534018003?text=${encodedMsg}`;
+    });
+  }
 }
 
-// Contact Form Handler
-function handleFormSubmit(event) {
+// Contact Form Handler (Sends directly to info@hindam-adv.com via FormSubmit AJAX)
+async function handleFormSubmit(event) {
   event.preventDefault();
 
-  const name = document.getElementById('name').value;
-  const company = document.getElementById('company').value;
-  const phone = document.getElementById('phone').value;
-  const email = document.getElementById('email').value;
-  const service = document.getElementById('serviceType').value;
-  const message = document.getElementById('message').value;
+  const name = document.getElementById('name').value.trim();
+  const company = document.getElementById('company').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const serviceSelect = document.getElementById('serviceType');
+  const serviceText = serviceSelect.options[serviceSelect.selectedIndex]
+    ? serviceSelect.options[serviceSelect.selectedIndex].text
+    : serviceSelect.value;
+  const message = document.getElementById('message').value.trim();
 
   const submitBtn = document.getElementById('submitBtn');
   const successBox = document.getElementById('formSuccessMessage');
+  const errorBox = document.getElementById('formErrorMessage');
+  const isEn = document.documentElement.getAttribute('lang') === 'en';
+
+  if (successBox) successBox.style.display = 'none';
+  if (errorBox) errorBox.style.display = 'none';
 
   if (submitBtn) {
     submitBtn.disabled = true;
     submitBtn.style.opacity = '0.7';
-    submitBtn.textContent = '...';
+    submitBtn.textContent = isEn ? 'Sending...' : 'جاري الإرسال...';
   }
 
-  // Simulate smooth submission
-  setTimeout(() => {
-    if (successBox) {
-      successBox.style.display = 'flex';
-      successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
+  const subject = isEn
+    ? `New Quote Request from ${name}${company ? ' - ' + company : ''}`
+    : `طلب عرض سعر جديد من ${name}${company ? ' - ' + company : ''}`;
 
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/info@hindam-adv.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        company: company || (isEn ? 'N/A' : 'غير محدد'),
+        phone: phone,
+        email: email,
+        _replyto: email,
+        service: serviceText,
+        message: message || (isEn ? 'N/A' : 'لا توجد ملاحظات إضافية'),
+        _subject: subject,
+        _template: 'table',
+        _captcha: 'false'
+      })
+    });
+
+    const result = await response.json();
+    if (response.ok && (result.success === 'true' || result.success === true)) {
+      if (successBox) {
+        successBox.style.display = 'flex';
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      document.getElementById('quoteForm').reset();
+    } else {
+      throw new Error(result.message || 'Submission failed');
+    }
+  } catch (err) {
+    if (errorBox) {
+      errorBox.style.display = 'flex';
+      errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    // Fallback to mailto if opened locally (file://) or network blocked
+    const fallbackBody = `Name: ${name}\nCompany: ${company}\nPhone: ${phone}\nEmail: ${email}\nService: ${serviceText}\n\nDetails:\n${message}`;
+    window.location.href = `mailto:info@hindam-adv.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fallbackBody)}`;
+  } finally {
     if (submitBtn) {
       submitBtn.disabled = false;
       submitBtn.style.opacity = '1';
-      const isEn = document.documentElement.getAttribute('lang') === 'en';
       submitBtn.textContent = isEn ? 'Submit Request Now' : 'إرسال الطلب الآن';
     }
-
-    // Reset Form fields
-    document.getElementById('quoteForm').reset();
-  }, 600);
+  }
 }
 
 // Gallery Filter & Lightbox Engine
